@@ -1,0 +1,682 @@
+# FollowUpHub AI Assistant Rules
+# Project: FollowUpHub (FUH-2025)
+# Owner: GURDIAN-X - Costantine George Mpanda
+# © 2025 GURDIAN-X. All Rights Reserved.
+# Timestamp: 2025-10-18 22:15:41 UTC
+
+# ============================================================================
+# CORE PHILOSOPHY: #ComplianceKwanza 🛡️
+# Security and compliance ALWAYS take precedence over features or speed
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# RULE 1: COMPLIANCE-FIRST DEVELOPMENT
+# ----------------------------------------------------------------------------
+# Every code suggestion MUST consider compliance implications
+# Never compromise on:
+# - Audit logging (immutable, 7-year retention)
+# - Input validation (all user inputs)
+# - Authentication checks (JWT, RBAC)
+# - Data encryption (TLS 1.3, AES-256)
+# - Security headers (CSP, HSTS, etc.)
+
+# ----------------------------------------------------------------------------
+# RULE 2: TECHNOLOGY STACK (NO DEVIATIONS)
+# ----------------------------------------------------------------------------
+# Frontend:
+# - React 18+ (functional components, hooks)
+# - Tailwind CSS 3+ (utility-first styling)
+# - Vite (build tool)
+# - React Router 6+ (navigation)
+
+# Backend:
+# - Node.js 18+ LTS
+# - Express 4+ (REST API)
+# - PostgreSQL 14+ (database)
+# - Prisma (ORM)
+
+# Authentication & Security:
+# - JWT (jsonwebtoken library)
+# - bcrypt 12 rounds (password hashing)
+# - helmet (security headers)
+# - express-rate-limit (rate limiting)
+
+# Testing:
+# - Jest (unit tests)
+# - Supertest (API tests)
+# - React Testing Library (component tests)
+
+# Code Quality:
+# - ESLint (Airbnb config)
+# - Prettier (formatting)
+# - JSDoc (documentation)
+
+# ----------------------------------------------------------------------------
+# RULE 3: CODE GENERATION STANDARDS
+# ----------------------------------------------------------------------------
+
+# Always include:
+# 1. JSDoc comments for all functions
+# 2. Input validation (all user inputs)
+# 3. Error handling (try-catch blocks)
+# 4. Audit logging (security-sensitive operations)
+# 5. Type checking (JSDoc types or TypeScript)
+
+# Example function template:
+# /**
+#  * Description of what the function does
+#  * @param {string} param1 - Description
+#  * @param {number} param2 - Description
+#  * @returns {Promise<Object>} Description
+#  * @throws {Error} When validation fails
+#  * @audit Logs all access attempts
+#  */
+# async function exampleFunction(param1, param2) {
+#   try {
+#     // Input validation
+#     if (!param1 || typeof param1 !== 'string') {
+#       throw new Error('Invalid param1: must be non-empty string');
+#     }
+#     
+#     // Audit logging
+#     await auditLog.create({
+#       action: 'EXAMPLE_ACTION',
+#       userId: req.user.id,
+#       details: { param1, param2 }
+#     });
+#     
+#     // Business logic
+#     const result = await performOperation(param1, param2);
+#     
+#     return result;
+#   } catch (error) {
+#     // Error logging
+#     logger.error('Example function failed', { error, param1, param2 });
+#     throw error;
+#   }
+# }
+
+# ----------------------------------------------------------------------------
+# RULE 4: SECURITY PATTERNS (ALWAYS IMPLEMENT)
+# ----------------------------------------------------------------------------
+
+# SQL Injection Prevention:
+# - ALWAYS use parameterized queries (Prisma ORM)
+# - NEVER concatenate user input into queries
+# ❌ Bad:  `SELECT * FROM users WHERE id = '${userId}'`
+# ✅ Good: `prisma.user.findUnique({ where: { id: userId } })`
+
+# XSS Prevention:
+# - Sanitize all user inputs before display
+# - Use React's built-in XSS protection (JSX escaping)
+# - Set Content-Security-Policy headers
+# ✅ Use: DOMPurify for rich text content
+
+# Authentication:
+# - Verify JWT on all protected routes
+# - Check RBAC permissions after authentication
+# - Log all authentication attempts
+# ✅ Middleware pattern:
+# const authenticate = async (req, res, next) => {
+#   const token = req.headers.authorization?.split(' ')[1];
+#   if (!token) return res.status(401).json({ error: 'No token provided' });
+#   
+#   try {
+#     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+#     req.user = await prisma.user.findUnique({ where: { id: decoded.userId } });
+#     if (!req.user) return res.status(401).json({ error: 'User not found' });
+#     
+#     await auditLog.create({
+#       action: 'AUTH_SUCCESS',
+#       userId: decoded.userId,
+#       ipAddress: req.ip
+#     });
+#     
+#     next();
+#   } catch (error) {
+#     await auditLog.create({
+#       action: 'AUTH_FAILURE',
+#       ipAddress: req.ip,
+#       error: error.message
+#     });
+#     return res.status(401).json({ error: 'Invalid token' });
+#   }
+# };
+
+# Authorization (RBAC):
+# - Define 5 roles: Owner, Admin, Manager, User, Viewer
+# - Check permissions on every protected resource
+# - Use role hierarchy: Owner > Admin > Manager > User > Viewer
+# ✅ Permission check:
+# const authorize = (requiredRole) => async (req, res, next) => {
+#   const roleHierarchy = { Owner: 5, Admin: 4, Manager: 3, User: 2, Viewer: 1 };
+#   const userRole = roleHierarchy[req.user.role] || 0;
+#   const required = roleHierarchy[requiredRole] || 0;
+#   
+#   if (userRole < required) {
+#     await auditLog.create({
+#       action: 'AUTHZ_FAILURE',
+#       userId: req.user.id,
+#       requiredRole,
+#       userRole: req.user.role
+#     });
+#     return res.status(403).json({ error: 'Insufficient permissions' });
+#   }
+#   
+#   next();
+# };
+
+# Rate Limiting:
+# - 100 requests per 15 minutes per user
+# - Stricter limits for auth endpoints (5 per 15 minutes)
+# ✅ Implementation:
+# const rateLimit = require('express-rate-limit');
+# const authLimiter = rateLimit({
+#   windowMs: 15 * 60 * 1000,
+#   max: 5,
+#   message: 'Too many authentication attempts'
+# });
+
+# ----------------------------------------------------------------------------
+# RULE 5: AUDIT LOGGING (MANDATORY)
+# ----------------------------------------------------------------------------
+
+# Log these actions ALWAYS:
+# - Authentication (login, logout, failures)
+# - Authorization failures
+# - Data modifications (CREATE, UPDATE, DELETE)
+# - Permission changes
+# - Configuration changes
+# - Data exports
+# - Security events
+
+# Audit log structure:
+# {
+#   id: UUID,
+#   userId: UUID (if authenticated),
+#   action: string (enum: 'LOGIN', 'CREATE_RESOLUTION', etc.),
+#   resourceType: string ('Resolution', 'User', etc.),
+#   resourceId: UUID (if applicable),
+#   oldValues: JSONB (for updates),
+#   newValues: JSONB (for creates/updates),
+#   ipAddress: string,
+#   userAgent: string,
+#   timestamp: datetime (immutable),
+#   sessionId: UUID
+# }
+
+# ✅ Audit logging pattern:
+# await auditLog.create({
+#   userId: req.user?.id,
+#   action: 'CREATE_RESOLUTION',
+#   resourceType: 'Resolution',
+#   resourceId: resolution.id,
+#   newValues: resolution,
+#   ipAddress: req.ip,
+#   userAgent: req.get('User-Agent'),
+#   sessionId: req.session?.id
+# });
+
+# ----------------------------------------------------------------------------
+# RULE 6: ERROR HANDLING (COMPREHENSIVE)
+# ----------------------------------------------------------------------------
+
+# Development vs Production:
+# - Development: Verbose errors with stack traces
+# - Production: Generic errors without sensitive data
+
+# ✅ Error handling pattern:
+# try {
+#   // Operation
+# } catch (error) {
+#   logger.error('Operation failed', {
+#     error: error.message,
+#     stack: error.stack,
+#     userId: req.user?.id,
+#     context: { /* relevant context */ }
+#   });
+#   
+#   if (process.env.NODE_ENV === 'production') {
+#     res.status(500).json({ error: 'An error occurred. Please try again.' });
+#   } else {
+#     res.status(500).json({ error: error.message, stack: error.stack });
+#   }
+# }
+
+# HTTP Status Codes:
+# - 200: Success
+# - 201: Created
+# - 400: Bad Request (validation errors)
+# - 401: Unauthorized (authentication required)
+# - 403: Forbidden (insufficient permissions)
+# - 404: Not Found
+# - 409: Conflict (duplicate resources)
+# - 422: Unprocessable Entity (business logic errors)
+# - 429: Too Many Requests (rate limiting)
+# - 500: Internal Server Error
+
+# ----------------------------------------------------------------------------
+# RULE 7: VALIDATION (ALL USER INPUTS)
+# ----------------------------------------------------------------------------
+
+# Use validation library (Joi, Yup, or Zod)
+# ✅ Validation example (Joi):
+# const Joi = require('joi');
+# 
+# const resolutionSchema = Joi.object({
+#   description: Joi.string().required().min(10).max(5000),
+#   type: Joi.string().valid('ILIELEKEZA', 'ILISHAURIWA').required(),
+#   priority: Joi.string().valid('HIGH', 'MEDIUM', 'LOW').required(),
+#   deadline: Joi.date().iso().min('now').required(),
+#   assigneeId: Joi.string().uuid().required()
+# });
+# 
+# const { error, value } = resolutionSchema.validate(req.body);
+# if (error) {
+#   return res.status(400).json({
+#     error: 'Validation failed',
+#     details: error.details
+#   });
+# }
+
+# ----------------------------------------------------------------------------
+# RULE 8: DATABASE PATTERNS
+# ----------------------------------------------------------------------------
+
+# Use Prisma ORM (no raw SQL unless necessary)
+# ✅ CRUD operations:
+
+# Create:
+# const resolution = await prisma.resolution.create({
+#   data: {
+#     description: validatedData.description,
+#     type: validatedData.type,
+#     organizationId: req.user.organizationId,
+#     createdBy: req.user.id
+#   }
+# });
+
+# Read:
+# const resolution = await prisma.resolution.findUnique({
+#   where: { id: resolutionId },
+#   include: {
+#     assignments: true,
+#     comments: true,
+#     createdByUser: { select: { name: true, email: true } }
+#   }
+# });
+
+# Update:
+# const updated = await prisma.resolution.update({
+#   where: { id: resolutionId },
+#   data: { status: 'COMPLETED' }
+# });
+
+# Delete (soft delete preferred):
+# const deleted = await prisma.resolution.update({
+#   where: { id: resolutionId },
+#   data: { deletedAt: new Date(), deletedBy: req.user.id }
+# });
+
+# Transactions (for multiple operations):
+# await prisma.$transaction(async (tx) => {
+#   const resolution = await tx.resolution.create({ data: resolutionData });
+#   const assignment = await tx.assignment.create({ data: assignmentData });
+#   await tx.auditLog.create({ data: auditData });
+# });
+
+# ----------------------------------------------------------------------------
+# RULE 9: BILINGUAL SUPPORT (SW/EN)
+# ----------------------------------------------------------------------------
+
+# All user-facing text must support both languages
+# ✅ Translation structure:
+# translations/
+#   en.json
+#   sw.json
+
+# Example en.json:
+# {
+#   "common": {
+#     "save": "Save",
+#     "cancel": "Cancel",
+#     "delete": "Delete"
+#   },
+#   "resolutions": {
+#     "create": "Create Resolution",
+#     "type_directive": "Directive (Mandatory)",
+#     "type_recommendation": "Recommendation (Optional)"
+#   }
+# }
+
+# Example sw.json:
+# {
+#   "common": {
+#     "save": "Hifadhi",
+#     "cancel": "Ghairi",
+#     "delete": "Futa"
+#   },
+#   "resolutions": {
+#     "create": "Unda Azimio",
+#     "type_directive": "Ilielekeza (Lazima)",
+#     "type_recommendation": "Ilishauriwa (Hiari)"
+#   }
+# }
+
+# Usage in React:
+# import { useTranslation } from 'react-i18next';
+# const { t } = useTranslation();
+# <button>{t('common.save')}</button>
+
+# ----------------------------------------------------------------------------
+# RULE 10: ACCESSIBILITY (WCAG 2.1 AA)
+# ----------------------------------------------------------------------------
+
+# All UI components must be accessible:
+# ✅ Semantic HTML: Use <button>, <nav>, <main>, <aside>
+# ✅ ARIA labels: Add aria-label, aria-describedby when needed
+# ✅ Keyboard navigation: All interactive elements accessible via keyboard
+# ✅ Focus indicators: Visible focus states (outline)
+# ✅ Color contrast: ≥4.5:1 for text, ≥3:1 for large text
+# ✅ Form labels: Every input has associated <label>
+# ✅ Error identification: Clear error messages with instructions
+
+# Example accessible form:
+# <form onSubmit={handleSubmit}>
+#   <label htmlFor="resolution-description">
+#     {t('resolutions.description')}
+#   </label>
+#   <textarea
+#     id="resolution-description"
+#     name="description"
+#     required
+#     aria-describedby="description-help"
+#     className="focus:outline-none focus:ring-2 focus:ring-blue-500"
+#   />
+#   <span id="description-help" className="text-sm text-gray-600">
+#     {t('resolutions.description_help')}
+#   </span>
+#   {errors.description && (
+#     <span role="alert" className="text-red-600">
+#       {errors.description}
+#     </span>
+#   )}
+# </form>
+
+# ----------------------------------------------------------------------------
+# RULE 11: TESTING REQUIREMENTS
+# ----------------------------------------------------------------------------
+
+# Test coverage: ≥80% for all new code
+
+# Unit Tests (Jest):
+# - Test individual functions
+# - Mock external dependencies
+# - Test edge cases and error conditions
+
+# Integration Tests (Supertest):
+# - Test API endpoints
+# - Test authentication/authorization
+# - Test database operations
+
+# Component Tests (React Testing Library):
+# - Test user interactions
+# - Test accessibility
+# - Test conditional rendering
+
+# ✅ Test example:
+# describe('Resolution API', () => {
+#   it('should create resolution with valid data', async () => {
+#     const response = await request(app)
+#       .post('/api/resolutions')
+#       .set('Authorization', `Bearer ${validToken}`)
+#       .send(validResolutionData);
+#     
+#     expect(response.status).toBe(201);
+#     expect(response.body).toHaveProperty('id');
+#     expect(response.body.description).toBe(validResolutionData.description);
+#   });
+#   
+#   it('should reject resolution without authentication', async () => {
+#     const response = await request(app)
+#       .post('/api/resolutions')
+#       .send(validResolutionData);
+#     
+#     expect(response.status).toBe(401);
+#   });
+# });
+
+# ----------------------------------------------------------------------------
+# RULE 12: PERFORMANCE OPTIMIZATION
+# ----------------------------------------------------------------------------
+
+# KPIs to meet:
+# - API response time: <200ms
+# - Page load time: <2s
+# - Database query time: <50ms
+
+# Optimization techniques:
+# ✅ Database indexing (on foreign keys, frequently queried fields)
+# ✅ Query optimization (select only needed fields, use pagination)
+# ✅ Caching (Redis for session data, frequently accessed data)
+# ✅ Lazy loading (React.lazy for code splitting)
+# ✅ Image optimization (WebP format, responsive images)
+# ✅ Compression (gzip/brotli for API responses)
+
+# Example query optimization:
+# ❌ Bad:  const users = await prisma.user.findMany();
+# ✅ Good: const users = await prisma.user.findMany({
+#   select: { id: true, name: true, email: true },
+#   take: 50,
+#   skip: page * 50,
+#   orderBy: { createdAt: 'desc' }
+# });
+
+# ----------------------------------------------------------------------------
+# RULE 13: ENVIRONMENT VARIABLES
+# ----------------------------------------------------------------------------
+
+# All configuration via environment variables
+# Never hardcode:
+# - Database credentials
+# - API keys
+# - JWT secrets
+# - Third-party service URLs
+# - Email credentials
+
+# ✅ Example .env structure:
+# # Database
+# DATABASE_URL="postgresql://user:password@localhost:5432/followuphub"
+# 
+# # Authentication
+# JWT_SECRET="your-secret-key-change-in-production"
+# JWT_ACCESS_EXPIRY="30m"
+# JWT_REFRESH_EXPIRY="7d"
+# 
+# # Server
+# PORT=3000
+# NODE_ENV="development"
+# 
+# # Email
+# SMTP_HOST="smtp.example.com"
+# SMTP_PORT=587
+# SMTP_USER="noreply@followuphub.com"
+# SMTP_PASSWORD="your-password"
+# 
+# # MinuteHub Integration
+# MINUTEHUB_API_URL="https://api.minutehub.com"
+# MINUTEHUB_API_KEY="your-api-key"
+# MINUTEHUB_WEBHOOK_SECRET="your-webhook-secret"
+
+# Access in code:
+# const config = {
+#   database: process.env.DATABASE_URL,
+#   jwt: {
+#     secret: process.env.JWT_SECRET,
+#     accessExpiry: process.env.JWT_ACCESS_EXPIRY,
+#     refreshExpiry: process.env.JWT_REFRESH_EXPIRY
+#   }
+# };
+
+# ----------------------------------------------------------------------------
+# RULE 14: GIT COMMIT CONVENTIONS
+# ----------------------------------------------------------------------------
+
+# Use conventional commits:
+# feat: New feature
+# fix: Bug fix
+# docs: Documentation changes
+# style: Code style changes (formatting)
+# refactor: Code refactoring
+# test: Adding or updating tests
+# chore: Maintenance tasks
+# security: Security fixes
+
+# Examples:
+# feat(auth): implement JWT refresh token rotation
+# fix(api): resolve CORS issue for MinuteHub webhooks
+# docs(readme): add installation instructions
+# security(deps): update express to patch CVE-2024-XXXX
+
+# ----------------------------------------------------------------------------
+# RULE 15: CODE REVIEW CHECKLIST
+# ----------------------------------------------------------------------------
+
+# Before submitting PR, verify:
+# [ ] Security vulnerabilities checked (OWASP Top 10)
+# [ ] Input validation implemented
+# [ ] Authentication/authorization checks in place
+# [ ] Audit logging added for sensitive operations
+# [ ] Error handling comprehensive
+# [ ] Tests written and passing (≥80% coverage)
+# [ ] JSDoc comments added
+# [ ] Accessibility verified (WCAG 2.1 AA)
+# [ ] Bilingual support implemented (SW/EN)
+# [ ] Performance optimized (meets KPIs)
+# [ ] Environment variables used (no hardcoded secrets)
+# [ ] Database migrations created (if schema changes)
+# [ ] API documentation updated (if API changes)
+# [ ] No console.log (use proper logging)
+# [ ] No commented-out code
+# [ ] ESLint and Prettier passed
+
+# ----------------------------------------------------------------------------
+# RULE 16: AVAILABLE AI PROMPTS
+# ----------------------------------------------------------------------------
+
+# Use these prompts for quick reference:
+
+# /charter - Display project charter key sections
+# /kpi - Show KPI targets and measurement criteria
+# /compliance - List compliance requirements (GDPR, TDPA 2022, OWASP)
+# /integrate - Show MinuteHub integration specification
+# /audit - Display audit logging requirements
+# /performance - Show performance optimization techniques
+# /security - Display security requirements and patterns
+# /bilingual - Show bilingual implementation guide
+# /accessibility - Display WCAG 2.1 AA requirements
+# /test - Show testing patterns and requirements
+# /deploy - Display deployment procedures
+
+# ----------------------------------------------------------------------------
+# RULE 17: PROHIBITED PATTERNS
+# ----------------------------------------------------------------------------
+
+# NEVER do these:
+# ❌ Store passwords in plain text (always bcrypt with 12 rounds)
+# ❌ Concatenate user input into SQL queries (use ORM)
+# ❌ Expose sensitive data in API responses (passwords, tokens, secrets)
+# ❌ Skip input validation (validate ALL user inputs)
+# ❌ Ignore error handling (wrap in try-catch)
+# ❌ Hardcode configuration (use environment variables)
+# ❌ Skip audit logging (log all sensitive operations)
+# ❌ Use synchronous operations in request handlers (use async/await)
+# ❌ Skip RBAC checks (verify permissions on all protected routes)
+# ❌ Return detailed error messages in production (generic messages)
+# ❌ Use HTTP for sensitive data (always HTTPS/TLS 1.3)
+# ❌ Store JWT in localStorage (use httpOnly cookies)
+# ❌ Skip rate limiting (implement on all public endpoints)
+# ❌ Ignore CORS configuration (properly configure for security)
+
+# ----------------------------------------------------------------------------
+# RULE 18: DOCUMENTATION REQUIREMENTS
+# ----------------------------------------------------------------------------
+
+# Update these files when relevant:
+# - README.md: User-facing features, setup changes
+# - API_DOCUMENTATION.md: New/modified API endpoints
+# - DATABASE_SCHEMA.md: Database schema changes
+# - TECHNICAL_SPECS.md: Architecture or design changes
+# - CHANGELOG.md: All user-facing changes
+# - SECURITY_POLICY.md: Security-related changes
+
+# ----------------------------------------------------------------------------
+# RULE 19: MINUTEHUB INTEGRATION MARKERS
+# ----------------------------------------------------------------------------
+
+# Use these markers in code comments for integration points:
+
+# @minutehub-webhook: Webhook integration endpoint
+# @minutehub-api: API integration endpoint
+# @minutehub-sync: Data synchronization logic
+
+# Example:
+# /**
+#  * MinuteHub webhook endpoint for receiving meeting resolutions
+#  * @minutehub-webhook
+#  * @route POST /api/webhooks/minutehub
+#  * @authentication HMAC signature verification
+#  */
+
+# ----------------------------------------------------------------------------
+# RULE 20: FINAL REMINDERS
+# ----------------------------------------------------------------------------
+
+# 🛡️ #ComplianceKwanza - Compliance ALWAYS comes first
+# 🔒 Security is non-negotiable
+# 📝 Audit everything
+# ✅ Test thoroughly (≥80% coverage)
+# 🌍 Support bilingual (SW/EN)
+# ♿ Ensure accessibility (WCAG 2.1 AA)
+# 📊 Meet performance KPIs (<200ms API, <2s page load)
+# 📚 Document comprehensively
+# 🚀 Deploy with confidence
+
+# ----------------------------------------------------------------------------
+# CONTACT INFORMATION
+# ----------------------------------------------------------------------------
+
+# Project Owner: Costantine George Mpanda (GURDIAN-X)
+# Institution: University of Dodoma (UDOM)
+# Location: Dodoma, Tanzania 🇹🇿
+
+# Emails:
+# - kapipocostantine@gmail.com
+# - costantine.mpanda@udom.ac.tz
+# - contact@gurdianx.com
+
+# Phones:
+# - +255714755686
+# - +255752999417
+
+# Repository: https://github.com/GURDIAN-X/FollowUpHub
+
+# ----------------------------------------------------------------------------
+# RELATED DOCUMENTATION
+# ----------------------------------------------------------------------------
+
+# 📄 PROJECT_CHARTER.md - Strategic framework and complete requirements
+# 📄 TECHNICAL_SPECS.md - Technical architecture
+# 📄 DATABASE_SCHEMA.md - Database design
+# 📄 API_DOCUMENTATION.md - API reference
+# 📄 SECURITY_POLICY.md - Security policies
+# 📄 CONTRIBUTING.md - Contribution guidelines
+
+# ----------------------------------------------------------------------------
+# COPYRIGHT
+# ----------------------------------------------------------------------------
+
+# © 2025 GURDIAN-X - Costantine George Mpanda. All Rights Reserved.
+# Timestamp: 2025-10-18 22:15:41 UTC
+# Made in Tanzania 🇹🇿
+# #ComplianceKwanza 🛡️

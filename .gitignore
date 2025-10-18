@@ -1,0 +1,353 @@
+# FollowUpHub .gitignore
+# Security-focused exclusions for version control
+# © 2025 GURDIAN-X - Costantine George Mpanda. All Rights Reserved.
+# Timestamp: 2025-10-18 22:15:41 UTC
+
+# ============================================================================
+# SECURITY-CRITICAL FILES (NEVER COMMIT THESE!)
+# ============================================================================
+
+# Environment Variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+.env.*.local
+
+# Secrets and Keys
+*.key
+*.pem
+*.cert
+*.crt
+*.p12
+*.pfx
+secret*
+secrets/
+.secrets/
+
+# Database Credentials
+database.yml
+config/database.yml
+
+# Authentication Tokens
+.npmrc
+.yarnrc
+
+# ============================================================================
+# DEPENDENCIES
+# ============================================================================
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Package Managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ============================================================================
+# BUILD ARTIFACTS
+# ============================================================================
+
+# Frontend (Vite/React)
+dist/
+dist-ssr/
+build/
+.vite/
+*.local
+
+# Backend
+out/
+.next/
+.nuxt/
+
+# Compiled Files
+*.tsbuildinfo
+*.js.map
+*.d.ts.map
+
+# ============================================================================
+# DEVELOPMENT FILES
+# ============================================================================
+
+# IDE - VSCode
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# IDE - WebStorm/IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# IDE - Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# IDE - Eclipse
+.project
+.classpath
+.settings/
+
+# Vim
+*.swp
+*.swo
+*~
+.vim/
+
+# ============================================================================
+# TESTING
+# ============================================================================
+
+# Test Coverage
+coverage/
+*.lcov
+.nyc_output/
+junit.xml
+test-results/
+
+# E2E Tests
+playwright-report/
+test-results/
+screenshots/
+
+# ============================================================================
+# LOGS
+# ============================================================================
+
+# Application Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# PM2 Logs
+pm2-logs/
+.pm2/
+
+# Combined Logs
+combined.log
+error.log
+access.log
+
+# ============================================================================
+# DATABASE
+# ============================================================================
+
+# SQLite
+*.db
+*.sqlite
+*.sqlite3
+
+# PostgreSQL
+*.pgsql
+*.dump
+
+# Prisma
+prisma/migrations/*_*/
+!prisma/migrations/migration_lock.toml
+
+# Database Backups
+backups/
+*.backup
+*.sql.gz
+
+# ============================================================================
+# CACHE & TEMPORARY FILES
+# ============================================================================
+
+# Cache Directories
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# Runtime Data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================================================
+# OPERATING SYSTEM FILES
+# ============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*/
+
+# ============================================================================
+# DOCKER
+# ============================================================================
+
+# Docker Files
+docker-compose.override.yml
+.dockerignore
+
+# Docker Volumes
+.docker/
+
+# ============================================================================
+# CLOUDINARY (FILE UPLOADS)
+# ============================================================================
+
+# Local Uploads
+uploads/
+public/uploads/
+static/uploads/
+
+# ============================================================================
+# MONITORING & ANALYTICS
+# ============================================================================
+
+# Sentry
+.sentryclirc
+
+# New Relic
+newrelic_agent.log
+newrelic.js
+
+# ============================================================================
+# DOCUMENTATION BUILD
+# ============================================================================
+
+# Documentation Sites
+docs/_build/
+site/
+_site/
+
+# ============================================================================
+# MISCELLANEOUS
+# ============================================================================
+
+# Lock Files
+*.lock
+
+# Compressed Files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Backup Files
+*.bak
+*.backup
+*.old
+
+# Editor Configs (optional - uncomment if needed)
+# .editorconfig
+# .prettierrc
+# .eslintrc.js
+
+# ============================================================================
+# PROJECT-SPECIFIC EXCLUSIONS
+# ============================================================================
+
+# MinuteHub Integration Testing
+minutehub-test-data/
+webhook-payloads/
+
+# Reports
+reports/
+*.pdf
+*.xlsx
+
+# Audit Exports
+audit-exports/
+compliance-reports/
+
+# Performance Tests
+benchmark-results/
+load-test-results/
+
+# ============================================================================
+# ALLOWED FILES (IMPORTANT - DO NOT IGNORE THESE)
+# ============================================================================
+
+# Keep these files committed:
+# - README.md
+# - LICENSE
+# - CHANGELOG.md
+# - PROJECT_CHARTER.md
+# - TECHNICAL_SPECS.md
+# - DATABASE_SCHEMA.md
+# - API_DOCUMENTATION.md
+# - SECURITY_POLICY.md
+# - CONTRIBUTING.md
+# - .cursorrules
+# - .env.example (template only, no real secrets)
+# - .gitignore (this file)
+# - package.json
+# - tsconfig.json
+# - prisma/schema.prisma
+# - docker-compose.yml (without secrets)
+
+# ============================================================================
+# SECURITY REMINDER
+# ============================================================================
+# 
+# NEVER COMMIT:
+# ❌ Passwords or API keys
+# ❌ Database credentials
+# ❌ JWT secrets
+# ❌ Private keys or certificates
+# ❌ User data or PII
+# ❌ Production configuration files
+# ❌ Audit logs with sensitive information
+# 
+# ALWAYS:
+# ✅ Use environment variables for secrets
+# ✅ Keep .env files in .gitignore
+# ✅ Provide .env.example templates
+# ✅ Rotate secrets if accidentally committed
+# ✅ Use git-secrets or similar tools
+# 
+# #ComplianceKwanza - Security First! 🛡️
+# 
+# ============================================================================
+
+# End of .gitignore

@@ -1,0 +1,286 @@
+# FollowUpHub License
+
+**Project Code:** FUH-2025  
+**Version:** 1.0.0  
+**Effective Date:** 2025-10-18  
+**Timestamp:** 2025-10-18 22:15:41 UTC
+
+---
+
+## Copyright Notice
+
+**Copyright © 2025 GURDIAN-X - Costantine George Mpanda. All Rights Reserved.**
+
+This software and associated documentation files (the "Software") are the proprietary property of Costantine George Mpanda, operating under the name GURDIAN-X.
+
+---
+
+## License Grant
+
+### Proprietary Software License
+
+This Software is licensed, not sold. Subject to the terms and conditions of this License, the copyright holder grants you a limited, non-exclusive, non-transferable, revocable license to use the Software for the following purposes:
+
+1. **Personal Use:** Use the Software for personal, non-commercial purposes
+2. **Educational Use:** Use the Software for educational and research purposes at academic institutions
+3. **Evaluation Use:** Evaluate the Software for potential commercial licensing
+
+---
+
+## Restrictions
+
+You are expressly prohibited from:
+
+❌ **Commercial Use:** Using the Software for commercial purposes without explicit written permission  
+❌ **Redistribution:** Distributing, sublicensing, or making the Software available to third parties  
+❌ **Modification:** Modifying, adapting, or creating derivative works based on the Software without permission  
+❌ **Reverse Engineering:** Reverse engineering, decompiling, or disassembling the Software  
+❌ **Removal of Notices:** Removing or altering any copyright, trademark, or proprietary notices  
+❌ **Rental/Leasing:** Renting, leasing, or lending the Software  
+❌ **Trademark Use:** Using the name "FollowUpHub", "GURDIAN-X", or any associated trademarks without permission  
+
+---
+
+## Commercial Licensing
+
+For commercial use, enterprise licensing, or custom development, please contact:
+
+**Copyright Holder:** Costantine George Mpanda (GURDIAN-X)  
+**Institution:** University of Dodoma (UDOM)  
+**Location:** Dodoma, Tanzania 🇹🇿
+
+**Contact Information:**
+- **Email:** kapipocostantine@gmail.com
+- **Email:** costantine.mpanda@udom.ac.tz
+- **Email:** contact@gurdianx.com
+- **Phone:** +255714755686
+- **Phone:** +255752999417
+
+**Repository:** https://github.com/GURDIAN-X/FollowUpHub
+
+---
+
+## Intellectual Property Rights
+
+### Ownership
+
+All right, title, and interest in and to the Software, including all:
+- Source code and object code
+- Documentation and materials
+- Algorithms and methodologies
+- User interfaces and designs
+- Trademarks and branding
+- Patents and trade secrets
+
+remain the exclusive property of Costantine George Mpanda (GURDIAN-X).
+
+### Trademarks
+
+The following are trademarks of GURDIAN-X:
+- **FollowUpHub™**
+- **#ComplianceKwanza™**
+- **GURDIAN-X™**
+
+Use of these trademarks requires explicit written permission.
+
+---
+
+## Contributions
+
+### Contributor License Agreement
+
+By submitting contributions (code, documentation, bug reports, suggestions) to this project, you agree that:
+
+1. You grant the copyright holder a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable license to use, reproduce, modify, and distribute your contributions
+2. You represent that you have the legal right to grant the above license
+3. You understand that your contributions may be used in commercial versions of the Software
+4. You waive any moral rights to the extent permitted by law
+
+### Recognition
+
+Contributors will be acknowledged in:
+- GitHub contributors page
+- Project documentation (where appropriate)
+- Release notes (for significant contributions)
+
+---
+
+## Third-Party Components
+
+This Software may include third-party open-source components, each governed by its own license terms:
+
+### Frontend Dependencies
+- **React:** MIT License
+- **Tailwind CSS:** MIT License
+- **Vite:** MIT License
+- (See package.json for complete list)
+
+### Backend Dependencies
+- **Node.js:** MIT License
+- **Express:** MIT License
+- **Prisma:** Apache License 2.0
+- (See package.json for complete list)
+
+These components retain their original licenses and are used in accordance with their respective terms.
+
+---
+
+## Disclaimer of Warranty
+
+**THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF:**
+
+- **MERCHANTABILITY:** Fitness for a particular purpose
+- **NON-INFRINGEMENT:** Freedom from claims of intellectual property infringement
+- **TITLE:** Clear ownership and right to use
+- **QUALITY:** Performance, accuracy, or reliability
+
+**THE COPYRIGHT HOLDER DOES NOT WARRANT THAT:**
+- The Software will meet your requirements
+- The Software will be uninterrupted, timely, secure, or error-free
+- The results obtained from use will be accurate or reliable
+- Any errors will be corrected
+
+**USE OF THE SOFTWARE IS AT YOUR OWN RISK.**
+
+---
+
+## Limitation of Liability
+
+**IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY:**
+
+- **Direct Damages:** Including but not limited to lost profits, revenue, or data
+- **Indirect Damages:** Consequential, incidental, or special damages
+- **Punitive Damages:** Exemplary or punitive damages
+- **Business Interruption:** Loss of business, opportunities, or goodwill
+
+**THIS LIMITATION APPLIES:**
+- Whether in contract, tort (including negligence), strict liability, or otherwise
+- Even if advised of the possibility of such damages
+- To the maximum extent permitted by applicable law
+
+**SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION MAY NOT APPLY TO YOU.**
+
+---
+
+## Indemnification
+
+You agree to indemnify, defend, and hold harmless the copyright holder from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising from:
+
+1. Your use of the Software
+2. Your violation of this License
+3. Your violation of any rights of another
+4. Your violation of any applicable laws or regulations
+
+---
+
+## Termination
+
+### Automatic Termination
+
+This License automatically terminates if you:
+- Violate any term of this License
+- Use the Software for unauthorized commercial purposes
+- Redistribute or sublicense the Software
+- Remove or alter copyright notices
+
+### Effect of Termination
+
+Upon termination, you must:
+1. Immediately cease all use of the Software
+2. Delete or destroy all copies of the Software
+3. Certify in writing that you have complied with the above
+
+Sections regarding Intellectual Property, Disclaimer, Limitation of Liability, and Indemnification survive termination.
+
+---
+
+## Governing Law
+
+This License shall be governed by and construed in accordance with the laws of the United Republic of Tanzania, without regard to its conflict of law provisions.
+
+Any legal action or proceeding arising under this License will be brought exclusively in the courts of Tanzania, and the parties hereby consent to personal jurisdiction and venue therein.
+
+---
+
+## Compliance Requirements
+
+If you use this Software, you acknowledge and agree to comply with all applicable laws and regulations, including but not limited to:
+
+✅ **Tanzania Data Protection Act, 2022** - Data privacy and protection  
+✅ **Computer Misuse and Cybercrimes Act, 2015** - Cybersecurity  
+✅ **Electronic and Postal Communications Act** - Electronic communications  
+✅ **GDPR** - If processing EU citizens' data  
+✅ **ISO 27001** - Information security management (recommended)  
+
+---
+
+## Export Control
+
+You acknowledge that the Software may be subject to export control laws and regulations. You agree not to export or re-export the Software in violation of any applicable laws or regulations, including but not limited to United States export laws.
+
+---
+
+## Severability
+
+If any provision of this License is held to be invalid or unenforceable, the remaining provisions shall continue in full force and effect. The invalid or unenforceable provision shall be replaced with a valid and enforceable provision that most closely matches the intent of the original provision.
+
+---
+
+## Entire Agreement
+
+This License constitutes the entire agreement between you and the copyright holder regarding the Software and supersedes all prior or contemporaneous agreements, understandings, or representations, whether written or oral.
+
+---
+
+## Modifications to License
+
+The copyright holder reserves the right to modify this License at any time. Continued use of the Software after any such changes constitutes your acceptance of the new License terms.
+
+**Current Version:** 1.0.0  
+**Last Updated:** 2025-10-18 22:15:41 UTC
+
+---
+
+## Contact Information
+
+For questions about this License or to request commercial licensing:
+
+**Copyright Holder:** Costantine George Mpanda  
+**Organization:** GURDIAN-X  
+**Institution:** University of Dodoma (UDOM)  
+**Location:** Dodoma, Tanzania 🇹🇿
+
+**Emails:**
+- kapipocostantine@gmail.com
+- costantine.mpanda@udom.ac.tz
+- contact@gurdianx.com
+
+**Phones:**
+- +255714755686
+- +255752999417
+
+**Repository:** https://github.com/GURDIAN-X/FollowUpHub
+
+---
+
+## Acknowledgments
+
+This project was developed at the **University of Dodoma (UDOM)**, Dodoma, Tanzania, as part of the commitment to building world-class, compliance-focused software solutions in Africa.
+
+**Philosophy:** #ComplianceKwanza 🛡️  
+**Origin:** Made in Tanzania 🇹🇿  
+**Timestamp:** 2025-10-18 22:15:41 UTC
+
+---
+
+## Legal Notice
+
+**BY DOWNLOADING, INSTALLING, OR USING THE SOFTWARE, YOU ACKNOWLEDGE THAT YOU HAVE READ THIS LICENSE, UNDERSTAND IT, AND AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS.**
+
+**IF YOU DO NOT AGREE TO THESE TERMS, DO NOT DOWNLOAD, INSTALL, OR USE THE SOFTWARE.**
+
+---
+
+**© 2025 GURDIAN-X - Costantine George Mpanda. All Rights Reserved.**
+
+**#ComplianceKwanza** 🛡️ | **Made in Tanzania** 🇹🇿
