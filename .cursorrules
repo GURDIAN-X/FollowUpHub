@@ -1,0 +1,106 @@
+# .cursorrules
+
+© 2025 GURDIAN-X - Costantine George Mpanda. All Rights Reserved.
+Timestamp: 2025-10-19 15:20:59 UTC
+
+---
+
+## #ComplianceKwanza Philosophy
+
+All AI coding agents (Copilot, Cursor, Claude Sonnet, etc.) must adhere to the #ComplianceKwanza philosophy—security, audit, compliance, and Tanzanian legal standards must be strictly followed in all code, documentation, and operational procedures. Reference PROJECT_CHARTER.md for strategic directives.
+
+---
+
+## Compliance Standards
+
+- Mandatory reference to PROJECT_CHARTER.md before generating any code.
+- All work must comply with GDPR-inspired, Tanzania Data Protection Act 2022, ISO 27001, OWASP Top 10, and WCAG 2.1 AA.
+- Audit trail logging required for all code changes (minimum retention: 7 years).
+
+---
+
+## Security Standards
+
+- Data at rest: AES-256 encryption.
+- Data in transit: TLS 1.3 minimum.
+- Authentication: JWT (30-min access, 7-day refresh), Bcrypt (≥12 rounds), MFA recommended.
+- RBAC: Owner, Admin, Manager, User, Viewer.
+- Rate limiting: All APIs must enforce per-role limits.
+- Secrets: Never commit credentials, secrets, or keys.
+
+---
+
+## Code Generation Rules
+
+- All files must begin with copyright header and timestamp.
+- Documentation: All code, endpoints, database models must reference relevant documentation file (see README.md).
+- Error handling: Use comprehensive try/catch, log all failures to audit trail.
+- Bilingual support: All user-facing features must be documented for Swahili/English toggling.
+- Accessibility: All UI output must meet WCAG 2.1 AA.
+- Testing: Minimum 80% coverage, tests in both backend and frontend.
+- No forbidden patterns: No hardcoded secrets, passwords, or API tokens.
+
+---
+
+## Response Formats
+
+- API responses: Standardized success/error structure with bilingual messages.
+- Audit log format: {timestamp, user_id, action, resource, status, details}
+
+---
+
+## Available Prompts
+
+- /charter
+- /kpi
+- /compliance
+- /integrate
+- /audit
+- /performance
+- /security
+- /bilingual
+- /accessibility
+
+---
+
+## Technology Stack Rules
+
+- Approved: React, Node.js, Express, PostgreSQL, Redis, Cloudinary.
+- Forbidden: Direct SQL queries outside ORM, unencrypted storage, unapproved third-party packages.
+
+---
+
+## Special Instructions
+
+- ILIELEKEZA (Directive, mandatory) vs ILISHAURIWA (Recommendation, optional): Both must be tracked and logged.
+- Resolution status flow: open, in-progress, completed, overdue, archived.
+- MinuteHub integration: All endpoints/events must support webhook sync and audit sharing.
+
+---
+
+## Contact & Escalation
+
+Owner: Costantine George Mpanda (GURDIAN-X)  
+Email: kapipocostantine@gmail.com, costantine.mpanda@udom.ac.tz, contact@gurdianx.com  
+Phone: +255714755686 / +255752999417  
+Institution: University of Dodoma (UDOM)
+
+---
+
+## Related Documentation
+
+- [README.md](./README.md)
+- [PROJECT_CHARTER.md](./PROJECT_CHARTER.md)
+- [TECHNICAL_SPECS.md](./TECHNICAL_SPECS.md)
+- [SECURITY_POLICY.md](./SECURITY_POLICY.md)
+- [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md)
+- [API_DOCUMENTATION.md](./API_DOCUMENTATION.md)
+- [CONTRIBUTING.md](./CONTRIBUTING.md)
+- [CHANGELOG.md](./CHANGELOG.md)
+- [LICENSE](./LICENSE)
+- [.env.example](./.env.example)
+- [.gitignore](./.gitignore)
+
+---
+
+#ComplianceKwanza 🛡️ | Made in Tanzania 🇹🇿
