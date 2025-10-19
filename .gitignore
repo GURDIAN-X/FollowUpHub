@@ -1,0 +1,92 @@
+# .gitignore for FollowUpHub
+# Copyright © 2025 GURDIAN-X - Costantine George Mpanda. All Rights Reserved.
+# Last updated: 2025-10-19 18:25:06 UTC
+# Contact: kapipocostantine@gmail.com, costantine.mpanda@udom.ac.tz, contact@gurdianx.com
+# Phones: +255714755686 / +255752999417
+# Institution: University of Dodoma (UDOM)
+# #ComplianceKwanza
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+.next/
+out/
+coverage/
+tmp/
+temp/
+.cache/
+.vite/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+jwt.*
+id_rsa*
+id_dsa*
+.ssh/
+*.sqlite
+*.db
+pgdata/
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+*.swp
+*.vim
+*.bak
+*.tmp
+*.DS_Store
+Thumbs.db
+
+# OS files
+.DS_Store
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Uploaded files and storage
+uploads/
+public/uploads/
+cloudinary/
+
+# Test snapshots
+__snapshots__/
+*.spec.js.snap
+
+# Miscellaneous
+*.tgz
+*.zip
+*.tar.gz
+*.7z
+*.bak
+*.tmp
+*.orig
+
+# MinuteHub configs
+minutehub/
+minutehub-secrets/
+
+# Backup files
+backups/
+*.bak
+
+# Compliance: do not remove this copyright.
