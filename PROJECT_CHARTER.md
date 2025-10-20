@@ -1,4 +1,5 @@
 PROJECT CHARTER
+
 FollowUpHub - Meeting Resolution Tracking System
 
 Document Version: 1.0
